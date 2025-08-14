@@ -1,0 +1,12 @@
+{
+  "welcome": "🎬 Welcome to Video Bot!\n\nSend me a video code to get your video.\n\n📋 Available commands:\n• /help - Show help\n• /language - Change language\n• /feedback - Send feedback",
+  "help_text": "📋 Help:\n\n🎯 How to use:\n• Send a video code to get your video\n• Make sure you're subscribed to required channels\n\n🔧 Commands:\n• /language - Change language\n• /feedback - Send feedback or complaint\n• /help - Show this help",
+  "choose_language": "🌐 Choose your language:",
+  "subscribe_first": "📢 Please subscribe to our channels first to use the bot:",
+  "not_subscribed": "❌ You must subscribe to all channels to use the bot.",
+  "video_not_found": "❌ Video not found. Please check your code and try again.",
+  "send_feedback": "💬 Please send your feedback or complaint:\n\n(Send your message in the next message)",
+  "feedback_received": "✅ Thank you! Your feedback has been received and sent to administrators.",
+  "invalid_code": "❌ Invalid video code format. Please check and try again.",
+  "bot_error": "❌ An error occurred while processing your request. Please try again later."
+}

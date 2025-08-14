@@ -1,0 +1,12 @@
+{
+  "welcome": "🎬 Video Botga xush kelibsiz!\n\nVideongizni olish uchun menga video kodini yuboring.\n\n📋 Mavjud buyruqlar:\n• /help - Yordam ko'rsatish\n• /language - Tilni o'zgartirish\n• /feedback - Fikr bildirish",
+  "help_text": "📋 Yordam:\n\n🎯 Qanday foydalanish:\n• Video olish uchun video kodini yuboring\n• Kerakli kanallarga obuna bo'lganingizga ishonch hosil qiling\n\n🔧 Buyruqlar:\n• /language - Tilni o'zgartirish\n• /feedback - Fikr yoki shikoyat yuborish\n• /help - Ushbu yordamni ko'rsatish",
+  "choose_language": "🌐 Tilingizni tanlang:",
+  "subscribe_first": "📢 Botdan foydalanish uchun avval kanallarimizga obuna bo'ling:",
+  "not_subscribed": "❌ Botdan foydalanish uchun barcha kanallarga obuna bo'lishingiz kerak.",
+  "video_not_found": "❌ Video topilmadi. Iltimos, kodingizni tekshiring va qayta urinib ko'ring.",
+  "send_feedback": "💬 Iltimos, fikr yoki shikoyatingizni yuboring:\n\n(Keyingi xabaringizda xabaringizni yuboring)",
+  "feedback_received": "✅ Rahmat! Sizning fikringiz qabul qilindi va administratorlarga yuborildi.",
+  "invalid_code": "❌ Video kodi formati noto'g'ri. Iltimos, tekshiring va qayta urinib ko'ring.",
+  "bot_error": "❌ So'rovingizni qayta ishlashda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring."
+}
