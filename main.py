@@ -7,26 +7,21 @@ from dotenv import load_dotenv
 import telebot
 from telebot.types import BotCommand, InlineKeyboardMarkup, InlineKeyboardButton
 
-# Load environment variables
+# ================= LOAD =================
 load_dotenv()
 
-# Logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Flask
 app = Flask(__name__)
 
-# Config
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL", f"https://{os.getenv('RENDER_EXTERNAL_HOSTNAME')}")
 REQUIRED_CHANNELS = [ch.strip() for ch in os.getenv("CHANNELS", "").split(",") if ch.strip()]
 ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
-# Bot
 bot = telebot.TeleBot(TOKEN)
 
-# Paths
 LANG_PATH = 'langs'
 USERS_FILE = 'data/users.json'
 CODES_FILE = 'data/codes.json'
@@ -39,8 +34,7 @@ LAST_MESSAGES = {}
 os.makedirs('data', exist_ok=True)
 os.makedirs(LANG_PATH, exist_ok=True)
 
-
-# ================== BOT MANAGER ==================
+# ================= BOT MANAGER =================
 
 class BotManager:
 
@@ -52,31 +46,45 @@ class BotManager:
             if os.path.exists(filepath):
                 with open(filepath, "r", encoding="utf-8") as f:
                     return json.load(f)
-        except Exception as e:
-            logger.error(f"Error loading {filepath}: {e}")
+        except:
+            return default
         return default
 
     @staticmethod
     def save_json_file(filepath, data):
-        try:
-            with open(filepath, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-        except Exception as e:
-            logger.error(f"Error saving {filepath}: {e}")
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def get_video_by_code(code):
         codes = BotManager.load_json_file(CODES_FILE)
         return codes.get(code)
 
+# ================= HANDLERS (siz yozganlaringiz qoladi) =================
 
-# ================== WEBHOOK SETUP ==================
+@bot.message_handler(commands=['start'])
+def start_handler(message):
+    bot.send_message(message.chat.id, "🎬 Welcome! Send video code.")
+
+@bot.message_handler(commands=['help'])
+def help_handler(message):
+    bot.send_message(message.chat.id, "📋 Send video code to receive video.")
+
+@bot.message_handler(func=lambda message: True)
+def text_handler(message):
+    code = message.text.strip()
+    video = BotManager.get_video_by_code(code)
+
+    if video:
+        bot.send_video(message.chat.id, video)
+    else:
+        bot.send_message(message.chat.id, "❌ Video not found.")
+
+# ================= WEBHOOK AUTO SETUP =================
 
 commands = [
     BotCommand("start", "Start the bot"),
     BotCommand("help", "Get help"),
-    BotCommand("language", "Change language"),
-    BotCommand("feedback", "Send feedback")
 ]
 
 try:
@@ -85,10 +93,9 @@ try:
     bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
     logger.info("Webhook successfully set")
 except Exception as e:
-    logger.error(f"Webhook setup error: {e}")
+    logger.error(f"Webhook error: {e}")
 
-
-# ================== FLASK ROUTES ==================
+# ================= FLASK ROUTES =================
 
 @app.route('/')
 def home():
